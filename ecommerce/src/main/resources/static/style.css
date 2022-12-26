@@ -1,0 +1,429 @@
+/* body */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Barra de Navegacion*/
+
+.navbar {
+    padding: 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+/*Estilos Generales*/
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+h1{
+    font-size: 2.2rem;
+    font-weight: bold;
+   
+}
+
+.header {
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 80px;
+    padding: 20px 20px 0px 20px;
+}
+
+
+/*Seccion hero*/
+
+.hero{
+    margin-top: 80px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+
+
+/*Seccion de productos*/
+
+.products h2{
+    text-align: center;
+}
+
+.products-contenedor {
+    min-height: 400px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex-direction: column;
+    margin: 20px 0px 20px 0px;
+    padding: 10px;
+    align-items: center;
+    height: 420px;
+    
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+    padding: 0px;
+    padding-bottom: 20px;
+   
+}
+
+.card img{
+    width: auto;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.card-title{
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/*  Footer */
+
+footer{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.192);
+    min-height: 200px;
+}
+
+.paragraft{
+    padding: 20px;
+    text-align: center;
+}
+
+
+/* Lista de Productos agregados */
+
+.lista-contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 80px 70px 60px 70px;
+    max-width: 1100px;
+    margin-top: 20px;
+}
+
+.lista-contenedor h2{
+    padding-bottom: 15px;
+}
+
+.lista-contenedor a{
+    margin-bottom: 10px;
+    max-width: 150px;
+}
+
+
+/*Creacion de un producto nuevo*/
+
+.datos-contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    width: 100%;
+    max-width: 1100px;
+    padding: 100px 70px 60px 70px;
+    
+}
+
+
+
+.datos-contenedor button {
+    margin-top: 10px;
+}
+
+.formulario-contenedor{
+    max-width: 500px;
+}
+
+
+/* Producto home*/
+
+.contenedor-padre{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1100px;
+    padding: 20px;
+}
+
+
+.ver-producto-contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    min-height: 700px;
+    max-width: 1100px;
+    flex-wrap: wrap;    
+}
+
+.imagen {
+    padding: 0px 10px 10px 10px;
+    margin: 0px 10px 10px 10px;
+    width: 500px;
+    height: 500px;
+    
+    
+}
+
+.ver-producto-descripcion {
+    
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 500px;
+    padding: 20px 20px 0px 20px;
+    border: 1px solid rgb(206, 199, 199);
+    border-radius: 3%;
+    justify-content: space-between;
+}
+
+.lista-descripcion {
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    padding: 0px;
+}
+
+.input-numero {
+    width: 40px;
+    text-align: center;
+}
+
+.boton {
+    text-align: center;
+    
+}
+
+.boton button {
+    width: 100%;
+}
+
+.ver-producto-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.vpf-item {
+    margin-bottom: 20px;
+}
+
+.product-detail h2{
+    font-weight: bold;
+}
+
+.price {
+    font-weight: bold;
+    color: rgb(26, 139, 231);
+}
+
+.cabecera {
+    padding: 0px 50px 0px 50px;
+}
+
+
+
+
+
+/* Carrito */
+
+.carrito-contenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 70px 20px 70px;
+    width: 100%;
+    max-width: 1100px;
+    min-height: 600px;
+}
+
+.carrito .header {
+    padding: 20px 70px 0px 70px;
+}
+
+.carrito-form{
+    padding: 0px 30px 30px 0px;
+    width: 100%;
+}
+
+.carrito-subtotal {
+    padding: 10px;
+    background-color: rgb(189, 187, 187);
+    width: 300px;
+}
+
+.boton-form{
+    width: 100%;
+    text-align: center;
+}
+
+.ver-producto-form h2, .ver-producto-form h3 {
+    font-weight: bold;
+}
+
+/* Carrito Vacio */
+
+.carrito-empty {
+    padding: 20px 70px 20px 70px;
+}
+
+/* Resumen de la Orden*/
+
+.datos-orden{
+    padding: 10px 10px 10px 0px;
+    margin-bottom: 20px;
+}
+
+.datos-orden h4{
+    margin-bottom: 15px;
+}
+
+/* Rgistro de usuario */
+
+.register {
+    
+    padding-top: 20px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.subtitulo {
+    margin-top: 30px;
+}
+
+.content button {
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 13px;
+    border-radius: 20px;
+}
+
+/* login */
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px 70px 60px 70px;
+}
+
+.new-clients {
+    margin-top: 60px;
+}
+
+
+/* Diseño Responsive*/
+@media screen and (max-width: 773px) {
+    .ver-producto-contenedor{
+        justify-content: center;
+    }
+
+
+    
+}
+
+@media screen and (max-width: 575px) {
+
+
+    /*Carrito*/
+    .carrito .header {
+        padding: 60px 10px 0px 10px;
+        
+    }
+
+    .carrito-contenedor{
+        flex-direction: column;
+        justify-content: normal;
+        padding: 10px;
+       
+
+    }
+
+    .carrito-subtotal{
+        width: 100%;
+    }
+
+
+
+    .hero {
+        margin-top: 120px;
+    }
+
+
+    .navbar {
+        height: 120px;
+    }
+    
+
+
+    .datos-contenedor {
+        padding: 140px 10px 0px 10px;
+     }
+
+
+     .login {
+        padding: 10px;
+     }
+
+     .register{
+        padding: 10px;
+     }
+
+     .imagen{
+        width: auto;
+        height: auto;
+    }
+
+    .ver-producto-contenedor {
+        justify-content: center;
+        padding: 0px;
+    }
+
+    .cabecera {
+        display: none;
+    }
+
+    .contenedor-padre {
+        padding: 0px;
+    }
+
+
+    .lista-contenedor{
+        padding: 120px 10px 0px 10px;
+    }
+   
+}
+
