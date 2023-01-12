@@ -35,12 +35,12 @@ public class ProductController {
     @GetMapping("")
     public String show(Model model){
         model.addAttribute("products", productService.findAll());
-        return "administrador/products/show";
+        return "products/show";
     }
 
     @GetMapping("/create")
     public String create(){
-        return "administrador/products/create";
+        return "products/create";
     }
 
     @PostMapping("/create")
@@ -74,7 +74,7 @@ public class ProductController {
 
         model.addAttribute("product", product);
 
-        return "administrador/products/edit";
+        return "products/edit";
     }
 
     @PostMapping("/update")

@@ -37,19 +37,19 @@ public class AdminController {
     public String home(Model model){
         List<Product> productList = productService.findAll();
         model.addAttribute("products", productList);
-        return "administrador/home";
+        return "admin/home";
     }
 
     @GetMapping("/users")
     public String users(Model model){
         model.addAttribute("userList", userService.findAll());
-        return "administrador/usuarios";
+        return "admin/usuarios";
     }
 
     @GetMapping("/orders")
     public String orders(Model model){
         model.addAttribute("orderList", orderService.findAll());
-        return "administrador/ordenes";
+        return "admin/ordenes";
     }
 
     @GetMapping("/detail/{id}")
@@ -57,7 +57,7 @@ public class AdminController {
         logger.info("Este es el id del user {}",id);
         Order order = orderService.findById(id).get();
         model.addAttribute("details", order.getOrderDetails());
-        return "administrador/detalleorden";
+        return "admin/detalleorden";
     }
 
     @PostMapping("search")
@@ -72,7 +72,7 @@ public class AdminController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        return "administrador/home";
+        return "admin/home";
     }
 
 

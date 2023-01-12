@@ -49,7 +49,7 @@ public class HomeController {
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
 
-        return "administrador/user/home";
+        return "user/home";
     }
 
     @GetMapping("productohome/{id}")
@@ -64,7 +64,7 @@ public class HomeController {
 
 
         model.addAttribute("product", product);
-        return "administrador/user/productohome";
+        return "user/productohome";
     }
 
     @PostMapping("car")
@@ -107,7 +107,7 @@ public class HomeController {
         model.addAttribute("order", order);
 
 
-        return "administrador/user/carrito";
+        return "user/carrito";
     }
 
     // Quitar producto del Carrito
@@ -141,13 +141,13 @@ public class HomeController {
 
 
         if(orderDetails.isEmpty()){
-            return "administrador/user/carritoempty";
+            return "user/carritoempty";
         }
 
         model.addAttribute("car", orderDetails);
         model.addAttribute("order",order);
 
-        return "administrador/user/carrito";
+        return "user/carrito";
     }
 
     @GetMapping("order")
@@ -162,7 +162,7 @@ public class HomeController {
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
 
-        return "administrador/user/resumenorden";
+        return "user/resumenorden";
     }
 
     @GetMapping("saveOrder")
@@ -202,7 +202,7 @@ public class HomeController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        return "administrador/user/home";
+        return "user/home";
     }
 
 }

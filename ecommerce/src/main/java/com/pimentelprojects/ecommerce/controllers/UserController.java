@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String createUser() {
-        return "administrador/user/registro";
+        return "user/registro";
     }
 
     @PostMapping("/save")
@@ -53,7 +53,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "administrador/user/login";
+        return "user/login";
     }
 
     @GetMapping("/access")
@@ -87,7 +87,7 @@ public class UserController {
         List<Order> orderList = orderService.findByUser(user);
 
         model.addAttribute("orders", orderList);
-        return "administrador/user/compras";
+        return "user/compras";
     }
 
     @GetMapping("/detail/{id}")
@@ -101,7 +101,7 @@ public class UserController {
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
 
-        return "administrador/user/detallecompra";
+        return "user/detallecompra";
     }
 
 
