@@ -6,8 +6,6 @@ import com.pimentelprojects.ecommerce.models.User;
 import com.pimentelprojects.ecommerce.services.ProductService;
 import com.pimentelprojects.ecommerce.services.UploadFileService;
 import com.pimentelprojects.ecommerce.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +24,6 @@ public class ProductController {
     private UserService userService;
     @Autowired
     private ProductService productService;
-    private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     private UploadFileService fileService;
@@ -47,7 +44,7 @@ public class ProductController {
     public String save(Product product,
                        @RequestParam("img") MultipartFile file,
                        HttpSession httpSession) throws IOException {
-        logger.info("Este es un objeto producto {}", product);
+
         User user = userService.findById(Long.parseLong(httpSession.getAttribute("idusuario").toString())).get();
 
         product.setUser(user);
@@ -70,7 +67,7 @@ public class ProductController {
         Optional<Product> optionalProduct = productService.getProduct(id);
         product = optionalProduct.get();
 
-        logger.info("producto buscado {}", product);
+
 
         model.addAttribute("product", product);
 

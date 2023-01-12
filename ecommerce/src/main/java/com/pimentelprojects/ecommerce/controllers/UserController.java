@@ -4,8 +4,6 @@ import com.pimentelprojects.ecommerce.models.Order;
 import com.pimentelprojects.ecommerce.models.User;
 import com.pimentelprojects.ecommerce.services.OrderService;
 import com.pimentelprojects.ecommerce.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,6 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -44,7 +41,7 @@ public class UserController {
 
     @PostMapping("/save")
     public String save(User user) {
-        logger.info("usuario regitro {}", user);
+
         user.setTipo("USER");
         user.setPassword(bCrypt.encode(user.getPassword()));
         userService.save(user);
@@ -58,11 +55,11 @@ public class UserController {
 
     @GetMapping("/access")
     public String access(User user, HttpSession httpSession) {
-        logger.info("acceso: {}", user);
+
 
         Optional<User> user1 = userService.findById(Long.parseLong(httpSession.getAttribute("idusuario").toString()));
 
-        logger.info("usuario obtenido {}", user1.get());
+
 
         if (user1.isPresent()) {
             httpSession.setAttribute("idusuario", user1.get().getId());
@@ -72,7 +69,7 @@ public class UserController {
                 return "redirect:/";
             }
         } else {
-            logger.info("User not exists");
+
         }
         return "redirect:/";
     }
@@ -92,7 +89,7 @@ public class UserController {
 
     @GetMapping("/detail/{id}")
     public String detailPurchase(@PathVariable("id") Long id, HttpSession httpSession, Model model) {
-        logger.info("id de la orden {}", id);
+
 
         Optional<Order> order = orderService.findById(id);
         model.addAttribute("details", order.get().getOrderDetails());

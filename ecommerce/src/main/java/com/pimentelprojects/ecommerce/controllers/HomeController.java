@@ -6,8 +6,6 @@ import com.pimentelprojects.ecommerce.models.OrderDetails;
 import com.pimentelprojects.ecommerce.models.Product;
 import com.pimentelprojects.ecommerce.models.User;
 import com.pimentelprojects.ecommerce.services.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/")
 public class HomeController {
 
-    private final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     @Autowired
     private ProductService productService;
     @Autowired
@@ -42,7 +40,6 @@ public class HomeController {
     @GetMapping("")
     public String home(Model model, HttpSession httpSession){
 
-        logger.info("Sesion del usuario {}", httpSession.getAttribute("idusuario"));
         model.addAttribute("products", productService.findAll());
 
         //Sesion
@@ -54,7 +51,7 @@ public class HomeController {
 
     @GetMapping("productohome/{id}")
     public String productHome(@PathVariable Long id, Model model, HttpSession httpSession){
-        logger.info("Id enviado como parametro {}", id);
+
         Product product = new Product();
         Optional<Product> productOptional = productService.getProduct(id);
         product = productOptional.get();
@@ -77,8 +74,7 @@ public class HomeController {
         double total = 0;
 
         Optional<Product> optionalProduct = productService.getProduct(id);
-        logger.info("Producto añadido {}", optionalProduct.get());
-        logger.info("cantidad {}", cantidad);
+
         product = optionalProduct.get();
 
         orderDetails1.setQuantity(cantidad);
@@ -192,7 +188,7 @@ public class HomeController {
 
     @PostMapping("search")
     public String search(@RequestParam String name, Model model, HttpSession httpSession){
-        logger.info("nombre del producto: {}", name);
+
 
         List<Product> productList = productService.findAll()
                                     .stream().filter(p -> p.getName()

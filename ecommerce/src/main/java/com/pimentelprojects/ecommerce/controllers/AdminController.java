@@ -6,8 +6,6 @@ import com.pimentelprojects.ecommerce.models.Product;
 import com.pimentelprojects.ecommerce.services.OrderService;
 import com.pimentelprojects.ecommerce.services.ProductService;
 import com.pimentelprojects.ecommerce.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +29,6 @@ public class AdminController {
     @Autowired
     private OrderService orderService;
 
-    private Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @GetMapping
     public String home(Model model){
@@ -54,7 +51,6 @@ public class AdminController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") Long id, Model model){
-        logger.info("Este es el id del user {}",id);
         Order order = orderService.findById(id).get();
         model.addAttribute("details", order.getOrderDetails());
         return "admin/detalleorden";
@@ -62,7 +58,6 @@ public class AdminController {
 
     @PostMapping("search")
     public String search(@RequestParam String name, Model model, HttpSession httpSession){
-        logger.info("nombre del producto: {}", name);
 
         List<Product> productList = productService.findAll()
                 .stream().filter(p -> p.getName()
