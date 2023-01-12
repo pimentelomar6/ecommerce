@@ -32,6 +32,9 @@ public class UserController {
     private OrderService orderService;
 
 
+    @Autowired
+    private HomeController homeController;
+
     BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 
     @GetMapping("/register")
@@ -105,6 +108,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logOut(HttpSession httpSession){
         httpSession.removeAttribute("idusuario");
+        homeController.orderDetails.clear();
         return "redirect:/";
     }
 

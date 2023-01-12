@@ -130,7 +130,7 @@ public class HomeController {
         order.setTotal(total);
         model.addAttribute("car", orderDetails);
         model.addAttribute("order",order);
-        return "administrador/user/carrito";
+        return "redirect:/getCar";
     }
 
     @GetMapping("getCar")
@@ -138,16 +138,14 @@ public class HomeController {
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
+
+
         if(orderDetails.isEmpty()){
             return "administrador/user/carritoempty";
         }
 
         model.addAttribute("car", orderDetails);
         model.addAttribute("order",order);
-
-
-
-
 
         return "administrador/user/carrito";
     }
