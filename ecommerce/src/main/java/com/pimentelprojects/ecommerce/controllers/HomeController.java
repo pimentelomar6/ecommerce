@@ -191,8 +191,8 @@ public class HomeController {
 
 
         List<Product> productList = productService.findAll()
-                                    .stream().filter(p -> p.getName()
-                                    .contains(name))
+                                    .stream().filter(p -> p.getName().toLowerCase()
+                                    .contains(name.toLowerCase()))
                                     .collect(Collectors.toList());
         model.addAttribute("products", productList);
 
