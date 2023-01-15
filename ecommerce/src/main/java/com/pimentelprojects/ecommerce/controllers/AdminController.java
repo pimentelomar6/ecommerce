@@ -50,7 +50,7 @@ public class AdminController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(@PathVariable("id") Long id, Model model){
+    public String detailByID(@PathVariable("id") Long id, Model model){
         Order order = orderService.findById(id).get();
         model.addAttribute("details", order.getOrderDetails());
         return "admin/orderdetail";

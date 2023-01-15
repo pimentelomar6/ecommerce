@@ -88,7 +88,7 @@ public class UserController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detailPurchase(@PathVariable("id") Long id, HttpSession httpSession, Model model) {
+    public String purchaseDetail(@PathVariable("id") Long id, HttpSession httpSession, Model model) {
 
 
         Optional<Order> order = orderService.findById(id);
@@ -103,7 +103,7 @@ public class UserController {
 
 
     @GetMapping("/logout")
-    public String logOut(HttpSession httpSession){
+    public String logout(HttpSession httpSession){
         httpSession.removeAttribute("idusuario");
         homeController.orderDetails.clear();
         return "redirect:/";

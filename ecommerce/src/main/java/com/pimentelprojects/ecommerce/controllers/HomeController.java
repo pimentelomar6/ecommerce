@@ -65,7 +65,7 @@ public class HomeController {
     }
 
     @PostMapping("car")
-    public String addCar(@RequestParam Long id,
+    public String addCart(@RequestParam Long id,
                          @RequestParam Integer cantidad,
                          Model model,
                          HttpSession httpSession){
@@ -109,7 +109,7 @@ public class HomeController {
     // Quitar producto del Carrito
 
     @GetMapping("delete/car/{id}")
-    public String deleteProductCar(@PathVariable Long id, Model model){
+    public String deleteProductCart(@PathVariable Long id, Model model){
         //Nueva lista de Productos
         List<OrderDetails> newOrders = new ArrayList<OrderDetails>();
 
@@ -130,7 +130,7 @@ public class HomeController {
     }
 
     @GetMapping("getCar")
-    public String getCar(Model model, HttpSession httpSession){
+    public String getCart(Model model, HttpSession httpSession){
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
