@@ -40,20 +40,20 @@ public class AdminController {
     @GetMapping("/users")
     public String users(Model model){
         model.addAttribute("userList", userService.findAll());
-        return "admin/usuarios";
+        return "admin/users";
     }
 
     @GetMapping("/orders")
     public String orders(Model model){
         model.addAttribute("orderList", orderService.findAll());
-        return "admin/ordenes";
+        return "admin/orders";
     }
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") Long id, Model model){
         Order order = orderService.findById(id).get();
         model.addAttribute("details", order.getOrderDetails());
-        return "admin/detalleorden";
+        return "admin/orderdetail";
     }
 
     @PostMapping("search")

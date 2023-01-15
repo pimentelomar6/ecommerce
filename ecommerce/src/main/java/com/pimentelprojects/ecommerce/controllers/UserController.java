@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String createUser() {
-        return "user/registro";
+        return "user/register";
     }
 
     @PostMapping("/save")
@@ -84,7 +84,7 @@ public class UserController {
         List<Order> orderList = orderService.findByUser(user);
 
         model.addAttribute("orders", orderList);
-        return "user/compras";
+        return "user/purchases";
     }
 
     @GetMapping("/detail/{id}")
@@ -98,7 +98,7 @@ public class UserController {
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
 
-        return "user/detallecompra";
+        return "user/purchasedetail";
     }
 
 
