@@ -25,7 +25,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/getCar}">Carrito</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/cart}">Carrito</a></li>
             <li class="breadcrumb-item active" aria-current="page">Orden</li>
           </ol>
         </nav>
@@ -71,7 +71,7 @@
                 <hr>
               </div>
               <div class="carrito-subtotal-boton">
-                <a th:href="@{/saveOrder}" class="btn btn-primary boton-form">Generar</a>
+                <a th:href="@{/order/save}" class="btn btn-primary boton-form">Generar</a>
               </div> 
           </form>
           </div>

@@ -35,7 +35,7 @@
             <img class="img-fluid rounded imagen" th:src="@{/images/{img} (img=${product.image}) }" alt="">
 
         <div class="ver-producto-descripcion" >
-          <form class="ver-producto-form" th:action="@{/car}" method="POST">
+          <form class="ver-producto-form" th:action="@{/cart/add}" method="POST">
             <div class="product-detail">
               <input type="hidden" th:value="${product.id}" name="id">
               <h2 class="vpf-item" th:text="${product.name}"></h2>

@@ -55,8 +55,6 @@ public class ProductController {
             product.setImage(nameImage);
         }
 
-
-
         productService.saveProduct(product);
         return "redirect:/products";
     }
@@ -66,8 +64,6 @@ public class ProductController {
         Product product = new Product();
         Optional<Product> optionalProduct = productService.getProduct(id);
         product = optionalProduct.get();
-
-
 
         model.addAttribute("product", product);
 
@@ -89,8 +85,6 @@ public class ProductController {
                 fileService.delete(product1.getImage());
             }
 
-
-
             String nameImage = fileService.saveImage(file);
             product.setImage(nameImage);
         }
@@ -110,7 +104,6 @@ public class ProductController {
         if(!product.getImage().equals("default.jpg")){
             fileService.delete(product.getImage());
         }
-
 
         productService.detele(id);
         return "redirect:/products";

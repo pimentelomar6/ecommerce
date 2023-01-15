@@ -45,12 +45,11 @@ public class HomeController {
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
-
         return "user/home";
     }
 
-    @GetMapping("productohome/{id}")
-    public String productHome(@PathVariable Long id, Model model, HttpSession httpSession){
+    @GetMapping("product/{id}")
+    public String productByID(@PathVariable Long id, Model model, HttpSession httpSession){
 
         Product product = new Product();
         Optional<Product> productOptional = productService.getProduct(id);
@@ -61,10 +60,10 @@ public class HomeController {
 
 
         model.addAttribute("product", product);
-        return "user/producthome";
+        return "user/product";
     }
 
-    @PostMapping("car")
+    @PostMapping("cart/add")
     public String addCart(@RequestParam Long id,
                          @RequestParam Integer cantidad,
                          Model model,
@@ -102,13 +101,12 @@ public class HomeController {
         model.addAttribute("car", orderDetails);
         model.addAttribute("order", order);
 
-
         return "user/cart";
     }
 
     // Quitar producto del Carrito
 
-    @GetMapping("delete/car/{id}")
+    @GetMapping("cart/delete/{id}")
     public String deleteProductCart(@PathVariable Long id, Model model){
         //Nueva lista de Productos
         List<OrderDetails> newOrders = new ArrayList<OrderDetails>();
@@ -126,18 +124,17 @@ public class HomeController {
         order.setTotal(total);
         model.addAttribute("car", orderDetails);
         model.addAttribute("order",order);
-        return "redirect:/getCar";
+        return "redirect:/cart";
     }
 
-    @GetMapping("getCar")
+    @GetMapping("cart")
     public String getCart(Model model, HttpSession httpSession){
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
 
-
         if(orderDetails.isEmpty()){
-            return "user/cartempty";
+            return "user/cart_empty";
         }
 
         model.addAttribute("car", orderDetails);
@@ -157,11 +154,10 @@ public class HomeController {
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
-
-        return "user/orderresume";
+        return "user/order_resume";
     }
 
-    @GetMapping("saveOrder")
+    @GetMapping("order/save")
     public String saveOrder(HttpSession httpSession){
         Date dateCreated = new Date();
         order.setDateCreate(dateCreated);
@@ -188,7 +184,6 @@ public class HomeController {
 
     @PostMapping("search")
     public String search(@RequestParam String name, Model model, HttpSession httpSession){
-
 
         List<Product> productList = productService.findAll()
                                     .stream().filter(p -> p.getName().toLowerCase()

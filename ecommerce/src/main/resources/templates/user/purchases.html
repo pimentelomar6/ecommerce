@@ -46,7 +46,7 @@
               <th scope="row" th:text="${order.number}"></th>
               <td th:text="${order.dateCreate}"></td>
               <td th:text="${order.total}"></td>
-              <td><a th:href="@{/user/detail/{id}  (id=${order.id})  }" class="btn btn-primary">Ver Detalle</a></td>
+              <td><a th:href="@{/user/purchases/detail/{id}  (id=${order.id})  }" class="btn btn-primary">Ver Detalle</a></td>
 
             </tr>
             

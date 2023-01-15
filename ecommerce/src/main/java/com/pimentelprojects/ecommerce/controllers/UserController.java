@@ -56,10 +56,7 @@ public class UserController {
     @GetMapping("/access")
     public String access(User user, HttpSession httpSession) {
 
-
         Optional<User> user1 = userService.findById(Long.parseLong(httpSession.getAttribute("idusuario").toString()));
-
-
 
         if (user1.isPresent()) {
             httpSession.setAttribute("idusuario", user1.get().getId());
@@ -87,9 +84,8 @@ public class UserController {
         return "user/purchases";
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/purchases/detail/{id}")
     public String purchaseDetail(@PathVariable("id") Long id, HttpSession httpSession, Model model) {
-
 
         Optional<Order> order = orderService.findById(id);
         model.addAttribute("details", order.get().getOrderDetails());
@@ -97,8 +93,7 @@ public class UserController {
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
 
-
-        return "user/purchasedetail";
+        return "user/purchase_detail";
     }
 
 

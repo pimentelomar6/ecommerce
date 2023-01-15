@@ -49,11 +49,11 @@ public class AdminController {
         return "admin/orders";
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("orders/detail/{id}")
     public String detailByID(@PathVariable("id") Long id, Model model){
         Order order = orderService.findById(id).get();
         model.addAttribute("details", order.getOrderDetails());
-        return "admin/orderdetail";
+        return "admin/order_detail";
     }
 
     @PostMapping("search")
@@ -69,9 +69,5 @@ public class AdminController {
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
         return "admin/home";
     }
-
-
-
-
 
 }
