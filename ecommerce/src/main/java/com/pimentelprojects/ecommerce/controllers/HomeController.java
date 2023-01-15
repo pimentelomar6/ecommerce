@@ -44,6 +44,7 @@ public class HomeController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
+        model.addAttribute("username", httpSession.getAttribute("username"));
 
         return "user/home";
     }
@@ -57,7 +58,7 @@ public class HomeController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-
+        model.addAttribute("username", httpSession.getAttribute("username"));
 
         model.addAttribute("product", product);
         return "user/product";
@@ -97,6 +98,7 @@ public class HomeController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
+        model.addAttribute("username", httpSession.getAttribute("username"));
 
         model.addAttribute("car", orderDetails);
         model.addAttribute("order", order);
@@ -131,7 +133,7 @@ public class HomeController {
     public String getCart(Model model, HttpSession httpSession){
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-
+        model.addAttribute("username", httpSession.getAttribute("username"));
 
         if(orderDetails.isEmpty()){
             return "user/cart_empty";
@@ -153,7 +155,7 @@ public class HomeController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-
+        model.addAttribute("username", httpSession.getAttribute("username"));
         return "user/order_resume";
     }
 
@@ -193,6 +195,7 @@ public class HomeController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
+        model.addAttribute("username", httpSession.getAttribute("username"));
         return "user/home";
     }
 

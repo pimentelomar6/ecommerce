@@ -76,6 +76,7 @@ public class UserController {
     public String getPurchases(Model model, HttpSession httpSession) {
 
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
+        model.addAttribute("username", httpSession.getAttribute("username"));
 
         User user = userService.findById(Long.parseLong(httpSession.getAttribute("idusuario").toString())).get();
         List<Order> orderList = orderService.findByUser(user);
@@ -92,6 +93,7 @@ public class UserController {
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
+        model.addAttribute("username", httpSession.getAttribute("username"));
 
         return "user/purchase_detail";
     }
@@ -100,6 +102,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(HttpSession httpSession){
         httpSession.removeAttribute("idusuario");
+        httpSession.removeAttribute("username");
         homeController.orderDetails.clear();
         return "redirect:/";
     }

@@ -32,6 +32,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if(optionalUser.isPresent()){
 
             httpSession.setAttribute("idusuario", optionalUser.get().getId());
+            httpSession.setAttribute("username", optionalUser.get().getName());
             User user = optionalUser.get();
             return org.springframework.security.core.userdetails
                     .User.builder().username(user.getName())
