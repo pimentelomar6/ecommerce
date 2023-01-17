@@ -81,6 +81,9 @@ public class UserController {
         User user = userService.findById(Long.parseLong(httpSession.getAttribute("idusuario").toString())).get();
         List<Order> orderList = orderService.findByUser(user);
 
+        if(orderList.isEmpty()){
+            return "user/purchases_empty";
+        }
         model.addAttribute("orders", orderList);
         return "user/purchases";
     }

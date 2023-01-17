@@ -46,6 +46,10 @@ public class HomeController {
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
         model.addAttribute("username", httpSession.getAttribute("username"));
 
+        if(productService.findAll().isEmpty()){
+            return "user/home_empty";
+        }
+
         return "user/home";
     }
 
@@ -191,11 +195,19 @@ public class HomeController {
                                     .stream().filter(p -> p.getName().toLowerCase()
                                     .contains(name.toLowerCase()))
                                     .collect(Collectors.toList());
+
+
         model.addAttribute("products", productList);
 
         //Sesion
         model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
         model.addAttribute("username", httpSession.getAttribute("username"));
+
+        if(productList.isEmpty()){
+            return "user/home-empty";
+        }
+
+
         return "user/home";
     }
 

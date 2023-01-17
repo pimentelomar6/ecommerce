@@ -32,6 +32,9 @@ public class ProductController {
     @GetMapping("")
     public String show(Model model){
         model.addAttribute("products", productService.findAll());
+        if(productService.findAll().isEmpty()){
+            return "products/show_empty";
+        }
         return "products/show";
     }
 

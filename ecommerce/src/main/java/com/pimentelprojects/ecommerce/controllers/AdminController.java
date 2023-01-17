@@ -3,6 +3,7 @@ package com.pimentelprojects.ecommerce.controllers;
 
 import com.pimentelprojects.ecommerce.models.Order;
 import com.pimentelprojects.ecommerce.models.Product;
+import com.pimentelprojects.ecommerce.models.User;
 import com.pimentelprojects.ecommerce.services.OrderService;
 import com.pimentelprojects.ecommerce.services.ProductService;
 import com.pimentelprojects.ecommerce.services.UserService;
@@ -34,18 +35,28 @@ public class AdminController {
     public String home(Model model){
         List<Product> productList = productService.findAll();
         model.addAttribute("products", productList);
+        if(productList.isEmpty()){
+            return "admin/home_empty";
+        }
         return "admin/home";
     }
 
     @GetMapping("/users")
     public String users(Model model){
         model.addAttribute("userList", userService.findAll());
+        if(userService.findAll().isEmpty()){
+            return "admin/users_empty";
+        }
         return "admin/users";
     }
 
     @GetMapping("/orders")
     public String orders(Model model){
         model.addAttribute("orderList", orderService.findAll());
+
+        if(orderService.findAll().isEmpty()){
+            return "admin/orders_empty";
+        }
         return "admin/orders";
     }
 
