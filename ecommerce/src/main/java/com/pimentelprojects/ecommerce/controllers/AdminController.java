@@ -43,8 +43,12 @@ public class AdminController {
 
     @GetMapping("/users")
     public String users(Model model){
-        model.addAttribute("userList", userService.findAll());
-        if(userService.findAll().isEmpty()){
+        List<User> users = userService.findAll().stream()
+                .filter(x-> x.getTipo().equals("USER"))
+                .collect(Collectors.toList());
+
+        model.addAttribute("userList", users);
+        if(users.isEmpty()){
             return "admin/users_empty";
         }
         return "admin/users";
