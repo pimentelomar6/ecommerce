@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ecommerce" target="18" />
+      <module name="ecommerce" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
