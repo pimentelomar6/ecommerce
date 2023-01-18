@@ -204,7 +204,7 @@ public class HomeController {
         model.addAttribute("username", httpSession.getAttribute("username"));
 
         if(productList.isEmpty()){
-            return "user/home-empty";
+            return "user/home_empty";
         }
 
 
