@@ -1,73 +1,65 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    
-    <title>TECSHOP | Detalle Orden</title>
-    
-    <!--Bootstrap-->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    
-    <!--CSS-->
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  <title>TECSHOP | Detalle Orden</title>
+
+  <!--Bootstrap-->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!--CSS-->
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
+
 <body>
-      <!--Barra de navegacion--->
-    <div th:include="admin/template_admin.html::header"></div>
   
+  <!--Barra de navegacion--->
+  <div th:include="admin/template_admin.html::header"></div>
+
+  <!--Producto-->
+  <section class="lista-productos">
+    <div class="lista-contenedor">
+      <h2>Detalles</h2>
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/admin}">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/admin/orders}">Ordenes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+        </ol>
+      </nav>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="detail:${details}">
+            <th th:text="${detail.quantity}" scope="row"></th>
+            <td th:text="${detail.name}"></td>
+            <td th:text="${detail.price}"></td>
+            <td th:text="${detail.total}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!--Footer-->
+  <footer class="footer">
+    <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
+  </footer>
 
 
-    <!--Producto-->
-    <section class="lista-productos">
-      <div class="lista-contenedor">
-        <h2>Detalles</h2>
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Inicio</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/admin/orders}">Ordenes</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Detalles</li>
-          </ol>
-        </nav>
-        
-        
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Total</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="detail:${details}">
-              <th th:text="${detail.quantity}" scope="row"></th>
-              <td th:text="${detail.name}"></td>
-              <td th:text="${detail.price}"></td>
-              <td th:text="${detail.total}"></td>
-              
-              
-              
-            </tr>
-            
-          </tbody>
-        </table>
-
-    
-        </div>
-      
-    </section>
-
-    
-
-    <!--Footer-->
-    <footer class="footer">
-      <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
-    </footer>
-      
-
-    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>  
+  <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>

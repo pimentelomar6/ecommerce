@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    
-    <title>Tienda Oline TECSHOP | Inicio de sesión de cliente</title>
-    
-    <!--Bootstrap-->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    
-    <!--CSS-->
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-</head>
-<body>
-  
-    <!--Barra de navegacion--->
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">TECSHOP</a> 
-      </div>
-    </nav>
 
-    <!--Registro de usuarios -->
-    <section class="datos-producto">
-      <div class="datos-contenedor login"> 
-        <div class="formulario-contenedor content">
+<head>
+
+  <title>Tienda Oline TECSHOP | Inicio de sesión de cliente</title>
+
+  <!--Bootstrap-->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!--CSS-->
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--Barra de navegacion--->
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/}">TECSHOP</a>
+    </div>
+  </nav>
+
+  <!--Registro de usuarios -->
+  <section class="datos-producto">
+    <div class="datos-contenedor login">
+      <div class="formulario-contenedor content">
         <form th:action="@{/user/login}" method="post">
           <h2>Inicio de sesión de cliente</h2>
           <h5 class="subtitulo">Clientes registrados</h5>
@@ -43,28 +47,23 @@
         <div class="new-clients">
           <h5 class="subtitulo2">Nuevos clientes</h5>
           <hr>
-          <p>Crear una cuenta tiene muchos beneficios: Pago más rápido, guardar más de una dirección, seguimiento de pedidos y mucho más.</p>
-          
+          <p>Crear una cuenta tiene muchos beneficios: Pago más rápido, guardar más de una dirección, seguimiento de
+            pedidos y mucho más.</p>
           <a th:href="@{/user/register}">
             <button type="button" class="btn btn-success">CREAR UNA CUENTA</button>
           </a>
         </div>
       </div>
+    </div>
+  </section>
 
-       
-    
-        </div>
-      
-    </section>
+  <!--Footer-->
+  <footer class="footer">
+    <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
+  </footer>
 
-    
 
-    <!--Footer-->
-    <footer class="footer">
-      <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
-    </footer>
-      
-
-    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>

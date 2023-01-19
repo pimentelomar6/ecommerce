@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    
-    <title th:text="'Tienda Oline TECSHOP | ' + ${product.name}"></title>
-    
-    <!--Bootstrap-->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    
-    <!--CSS-->
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  <title th:text="'Tienda Oline TECSHOP | ' + ${product.name}"></title>
+
+  <!--Bootstrap-->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!--CSS-->
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+
   <!--Barra de navegacion--->
-<div th:include="user/template_user.html::header" th:if="${sesion==null}"></div>
+  <div th:include="user/template_user.html::header" th:if="${sesion==null}"></div>
 
-<div th:include="user/template_user.html::header-user" th:unless="${sesion==null}"></div>
+  <div th:include="user/template_user.html::header-user" th:unless="${sesion==null}"></div>
 
-    <!--Actualizar producto -->
-    <section class="ver-producto">
-      <div class="contenedor-padre hero">
+  <!--Actualizar producto -->
+  <section class="ver-producto">
+    <div class="contenedor-padre hero">
       <div class="cabecera">
         <h2>Producto</h2>
-      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Producto</li>
-        </ol>
-      </nav>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Producto</li>
+          </ol>
+        </nav>
       </div>
       <div class="ver-producto-contenedor">
-            <img class="img-fluid rounded imagen" th:src="@{/images/{img} (img=${product.image}) }" alt="">
-
-        <div class="ver-producto-descripcion" >
+        <img class="img-fluid rounded imagen" th:src="@{/images/{img} (img=${product.image}) }" alt="">
+        <div class="ver-producto-descripcion">
           <form class="ver-producto-form" th:action="@{/cart/add}" method="POST">
             <div class="product-detail">
               <input type="hidden" th:value="${product.id}" name="id">
               <h2 class="vpf-item" th:text="${product.name}"></h2>
               <ul class="lista-descripcion">
-                <li class="vpf-item price"><h3 th:text= "'US$ ' + ${product.price}"></h3></li>
-                <li class="vpf-item"><p th:text="${product.description}"></p></li>
-                <li class="vpf-item">Cantidad: <input class="input-numero" type="number" id="cantidad" name="cantidad" autocomplete="off"
-                  min="1" max="5" value="1"></li>
+                <li class="vpf-item price">
+                  <h3 th:text="'US$ ' + ${product.price}"></h3>
+                </li>
+                <li class="vpf-item">
+                  <p th:text="${product.description}"></p>
+                </li>
+                <li class="vpf-item">Cantidad: <input class="input-numero" type="number" id="cantidad" name="cantidad"
+                    autocomplete="off" min="1" max="5" value="1"></li>
               </ul>
             </div>
             <div class="boton">
@@ -52,19 +59,16 @@
           </form>
         </div>
       </div>
-      </div>
+    </div>
+  </section>
+
+  <!--Footer-->
+  <footer class="footer">
+    <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
+  </footer>
 
 
-    </section>
-
-    
-
-    <!--Footer-->
-    <footer class="footer">
-      <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
-    </footer>
-      
-
-    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>

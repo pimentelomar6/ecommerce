@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    
-    <title>TECSHOP | Editar Producto</title>
-    
-    <!--Bootstrap-->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    
-    <!--CSS-->
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!--Barra de navegacion--->
-<div th:include="admin/template_admin.html::header"></div> 
 
-    <!--Crear producto -->
-    <section class="datos-producto">
-      <div class="datos-contenedor">
-        <div>
+<head>
+
+  <title>TECSHOP | Editar Producto</title>
+
+  <!--Bootstrap-->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!--CSS-->
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  
+  <!--Barra de navegacion--->
+  <div th:include="admin/template_admin.html::header"></div>
+
+  <!--Crear producto -->
+  <section class="datos-producto">
+    <div class="datos-contenedor">
+      <div>
         <h2>Editar producto</h2>
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -28,51 +33,46 @@
             <li class="breadcrumb-item active" aria-current="page">Editar Producto</li>
           </ol>
         </nav>
-        </div>
-        
-        <div class="formulario-contenedor">
+      </div>
+      <div class="formulario-contenedor">
         <form th:action="@{/products/update}" method="post" enctype="multipart/form-data">
           <input type="hidden" name="id" th:value="${product.id}">
           <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="" th:value="${product.name}" required>
+            <input type="text" class="form-control" id="name" name="name" placeholder="" th:value="${product.name}"
+              required>
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Descripcion</label>
-            <textarea type="text" class="form-control" id="description" name="description" rows="3" th:text="${product.description}" required></textarea>
+            <textarea type="text" class="form-control" id="description" name="description" rows="3"
+              th:text="${product.description}" required></textarea>
           </div>
           <div class="mb-3">
             <label for="quantity" class="form-label">Cantidad</label>
-            <input type="number" class="form-control"  id="quantity" name="quantity" placeholder="" th:value="${product.quantity}" required>
+            <input type="number" class="form-control" id="quantity" name="quantity" placeholder=""
+              th:value="${product.quantity}" required>
           </div>
           <div class="mb-3">
             <label for="price" class="form-label">Precio</label>
-            <input type="number" class="form-control" step="any" id="price" name="price" placeholder="" th:value="${product.price}" required>
+            <input type="number" class="form-control" step="any" id="price" name="price" placeholder=""
+              th:value="${product.price}" required>
           </div>
           <div class="mb-3">
             <label for="img" class="form-label">Default file input example</label>
-            <input  class="form-control" type="file" id="img" name="img">
+            <input class="form-control" type="file" id="img" name="img">
           </div>
           <button type="submit" class="btn btn-success">Guardar</button>
-
-
         </form>
       </div>
+    </div>
+  </section>
 
-       
-    
-        </div>
-      
-    </section>
+  <!--Footer-->
+  <footer class="footer">
+    <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
+  </footer>
 
-    
-
-    <!--Footer-->
-    <footer class="footer">
-      <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
-    </footer>
-      
-
-    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>

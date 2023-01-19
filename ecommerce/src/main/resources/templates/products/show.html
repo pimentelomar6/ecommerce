@@ -1,74 +1,68 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    
-    <title>TECSHOP | Productos</title>
-    
-    <!--Bootstrap-->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    
-    <!--CSS-->
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  <title>TECSHOP | Productos</title>
+
+  <!--Bootstrap-->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!--CSS-->
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <!--Barra de navegacion--->
-<div th:include="admin/template_admin.html::header"></div>  
 
+  <!--Barra de navegacion--->
+  <div th:include="admin/template_admin.html::header"></div>
 
+  <!--Producto-->
+  <section class="lista-productos">
+    <div class="lista-contenedor">
+      <h2>Productos</h2>
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/admin}">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Productos</li>
+        </ol>
+      </nav>
+      <a th:href="@{/products/create}" class="btn btn-primary">Crear Producto</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Inventario</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Accion</th>
+            <th scope="col">Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="p:${products}">
+            <th th:text="${p.name}" scope="row"></th>
+            <td th:text="${p.description}"></td>
+            <td th:text="${p.quantity}"></td>
+            <td th:text="${p.price}"></td>
+            <td><a th:href="@{products/edit/{id} (id=${p.id}) }" class="btn btn-danger">Editar</a></td>
+            <td><a th:href="@{products/delete/{id} (id=${p.id}) }" class="btn btn-warning">Eliminar</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-    <!--Producto-->
-    <section class="lista-productos">
-      <div class="lista-contenedor">
-        <h2>Productos</h2>
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Inicio</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Productos</li>
-          </ol>
-        </nav>
-        
-          <a th:href="@{/products/create}" class="btn btn-primary">Crear Producto</a>
-        
-        
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Descripcion</th>
-              <th scope="col">Inventario</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Accion</th>
-              <th scope="col">Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="p:${products}">
-              <th  th:text="${p.name}" scope="row"></th>
-              <td th:text="${p.description}"></td>
-              <td th:text="${p.quantity}"></td>
-              <td th:text="${p.price}"></td>
-              <td><a th:href="@{products/edit/{id} (id=${p.id}) }" class="btn btn-danger">Editar</a></td>
-              <td><a  th:href="@{products/delete/{id} (id=${p.id}) }" class="btn btn-warning">Eliminar</a></td>
-            </tr>
-            
-          </tbody>
-        </table>
+  <!--Footer-->
+  <footer class="footer">
+    <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
+  </footer>
 
-    
-        </div>
-      
-    </section>
-
-    
-
-    <!--Footer-->
-    <footer class="footer">
-      <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
-    </footer>
-      
-
-    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>

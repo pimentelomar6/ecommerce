@@ -1,90 +1,91 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Tienda Oline TECSHOP | Resumen de la Orden</title>    
-    
-    <!--Bootstrap-->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <title>Tienda Oline TECSHOP | Resumen de la Orden</title>
 
-    <!--CSS-->
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <!--Bootstrap-->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!--CSS-->
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
-    <!--Barra de navegacion--->
-<div th:include="user/template_user.html::header" th:if="${sesion==null}"></div>
 
-<div th:include="user/template_user.html::header-user" th:unless="${sesion==null}"></div>
+  <!--Barra de navegacion--->
+  <div th:include="user/template_user.html::header" th:if="${sesion==null}"></div>
 
-    <!--Carrito -->
-    <section class="carrito">
-      <div class="header">
-        <h2>Orden</h2>
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/cart}">Carrito</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Orden</li>
-          </ol>
-        </nav>
+  <div th:include="user/template_user.html::header-user" th:unless="${sesion==null}"></div>
+
+  <!--Carrito -->
+  <section class="carrito">
+    <div class="header">
+      <h2>Orden</h2>
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+          <li class="breadcrumb-item"><a th:href="@{/cart}">Carrito</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Orden</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="carrito-contenedor">
+      <div class="carrito-form">
+        <div class="datos-orden">
+          <h4>DATOS DE LA ORDEN</h4>
+          <h6 th:text="'Nombre: ' + ${user.name}"></h6>
+          <h6 th:text="'Correo: ' + ${user.mail}"></h6>
+          <h6 th:text="'Direccion: ' + ${user.address}"></h6>
+        </div>
+        <div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="dtorder:${car}">
+                <th th:text="${dtorder.name}" scope="row"></th>
+                <td th:text="'US$ ' + ${dtorder.price}"></td>
+                <td th:text="${dtorder.quantity}"></td>
+                <td th:text="'US$ ' + ${dtorder.total}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      
-      <div class="carrito-contenedor">
-          <div class="carrito-form">
-            <div class="datos-orden">
-                <h4 >DATOS DE LA ORDEN</h4>
-                <h6 th:text="'Nombre: ' + ${user.name}"></h6>
-                <h6 th:text="'Correo: ' + ${user.mail}"></h6>
-                <h6 th:text="'Direccion: ' + ${user.address}"></h6> 
-            </div>
-            <div>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="dtorder:${car}">
-                    <th th:text="${dtorder.name}" scope="row"></th>
-                    <td th:text="'US$ ' + ${dtorder.price}"></td>
-                    <td th:text="${dtorder.quantity}"></td>
-                    <td th:text="'US$ ' + ${dtorder.total}"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          
+      <div class="carrito-subtotal">
+        <form class="ver-producto-form" action="">
+          <div class="carrito-subtotal-description">
+            <h2>Resumen</h2>
+            <hr>
+            <h3 th:text="'US$ ' + ${order.total}"></h3>
+            <hr>
           </div>
-
-          <div class="carrito-subtotal">
-          <form class="ver-producto-form" action="">
-              <div class="carrito-subtotal-description">
-                <h2>Resumen</h2>
-                <hr>
-                <h3 th:text="'US$ ' + ${order.total}"></h3>
-                <hr>
-              </div>
-              <div class="carrito-subtotal-boton">
-                <a th:href="@{/order/save}" class="btn btn-primary boton-form">Generar</a>
-              </div> 
-          </form>
+          <div class="carrito-subtotal-boton">
+            <a th:href="@{/order/save}" class="btn btn-primary boton-form">Generar</a>
           </div>
+        </form>
       </div>
-    </section>
+    </div>
+  </section>
+
+  <!--Footer-->
+  <footer class="footer">
+    <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
+  </footer>
 
 
-    <!--Footer-->
-    <footer class="footer">
-      <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
-    </footer>
-      
-
-    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>
