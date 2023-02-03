@@ -1,12 +1,35 @@
 # Ecommerce
+Ecommerce completo usando Java, Spring Framework
 
-<p>
-Ecommerce completo usando Spring MVC
-</p>
+## Video Demostración
 
-<img src="images/index.jpg" width=500px>
-<img src="images/products.jpg" width=500px>
+[![DemostracionVideo](https://github.com/pimentelomar6/ecommerce/blob/master/images/principal-1.jpg "DemostracionVideo")](https://youtu.be/kRbo_VTFL0I "DemostracionVideo")
 
-## Tecnologías
-<ul><li>Java</li><li>Spring Framework</li><li>Spring Boot</li><li>Servicios REST</li><li>Thymeleaf</li><li>Spring MVC</li><li>Spring Data JPA</li><li>Spring Security</li><li>HTML</li><li>CSS</li><li>Bootstrap 5</li><li>PostgreSQL</li>
-</ul>
+
+### Tecnologías
+- Java
+- Spring Framework
+- Spring Boot
+- Servicios REST
+- Thymeleaf
+- Spring MVC
+- Spring Data JPA
+- Spring Security
+- HTML, CSS
+- Bootstrap 5
+- PostgreSQL
+
+## Imágenes
+![](https://github.com/pimentelomar6/ecommerce/blob/master/images/principal-2.jpg)
+
+>  Inicio de Sesión
+
+![](https://github.com/pimentelomar6/ecommerce/blob/master/images/login.jpg)
+
+>  Carrito de compras
+
+![](https://github.com/pimentelomar6/ecommerce/blob/master/images/carrito.jpg)
+
+>  Panel de gestión de productos
+
+![](https://github.com/pimentelomar6/ecommerce/blob/master/images/products.jpg)
