@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org">
 
 <head>
 
@@ -20,9 +21,11 @@
 <body>
 
   <!--Barra de navegacion--->
-  <div th:include="user/template_user.html::header" th:if="${sesion==null}"></div>
+  <div th:include="user/template_user.html::header" sec:authorize="!isAuthenticated()"></div>
 
-  <div th:include="user/template_user.html::header-user" th:unless="${sesion==null}"></div>
+  <div th:include="user/template_user.html::header-user" sec:authorize="isAuthenticated()" th:if="${role=='USER'}"></div>
+
+  <div th:include="admin/template_admin.html::header" sec:authorize="isAuthenticated()" th:if="${role=='ADMIN'}" ></div>
 
   <!--Hero-->
   <section class="hero">

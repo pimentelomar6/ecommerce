@@ -1,17 +1,15 @@
 package com.pimentelprojects.ecommerce.services;
 
-import com.pimentelprojects.ecommerce.models.User;
+import com.pimentelprojects.ecommerce.dto.RegistrationDto;
+import com.pimentelprojects.ecommerce.models.UserEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> findById(Long id);
-
-    User save(User user);
-
-    Optional<User> findByEmail(String mail);
-
-    List<User> findAll();
+    Optional<UserEntity> findById(Long id);
+    void save(RegistrationDto registrationDto);
+    UserEntity findByEmail(String mail);
+    List<UserEntity> findAll();
 }

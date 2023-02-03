@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org">
 
 <head>
 
@@ -29,7 +30,13 @@
   <section class="datos-producto">
     <div class="datos-contenedor login">
       <div class="formulario-contenedor content">
-        <form th:action="@{/user/login}" method="post">
+        <div th:if="${param.error}" class="alert alert-danger">
+          Correo o Contraseña inválido.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+          Se ha cerrado la sesión exitosamente.
+        </div>
+        <form class="needs-validation" role="form" th:action="@{/login}" method="post" novalidate>
           <h2>Inicio de sesión de cliente</h2>
           <h5 class="subtitulo">Clientes registrados</h5>
           <hr>
@@ -37,19 +44,23 @@
           <div class="mb-3">
             <label for="username" class="form-label">Correo electrónico</label>
             <input type="email" class="form-control" id="username" name="username" placeholder="" required>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">El campo no puede estar vacío</div>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="" required>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">El campo no puede estar vacío</div>
           </div>
-          <button type="submit" class="btn btn-success">INICIAR SESIÓN</button>
+          <button value="Log in" type="submit" class="btn btn-success">INICIAR SESIÓN</button>
         </form>
         <div class="new-clients">
           <h5 class="subtitulo2">Nuevos clientes</h5>
           <hr>
           <p>Crear una cuenta tiene muchos beneficios: Pago más rápido, guardar más de una dirección, seguimiento de
             pedidos y mucho más.</p>
-          <a th:href="@{/user/register}">
+          <a th:href="@{/register}">
             <button type="button" class="btn btn-success">CREAR UNA CUENTA</button>
           </a>
         </div>
@@ -62,7 +73,27 @@
     <p class="paragraft">Copyright © 2022 OMAR PIMENTEL. Todos los derechos reservado.</p>
   </footer>
 
+<script>
+  (() => {
+  'use strict'
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+</script>
   <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 

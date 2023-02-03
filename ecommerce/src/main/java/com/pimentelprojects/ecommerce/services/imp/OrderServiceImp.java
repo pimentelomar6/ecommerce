@@ -1,8 +1,9 @@
-package com.pimentelprojects.ecommerce.services;
+package com.pimentelprojects.ecommerce.services.imp;
 
 import com.pimentelprojects.ecommerce.models.Order;
-import com.pimentelprojects.ecommerce.models.User;
+import com.pimentelprojects.ecommerce.models.UserEntity;
 import com.pimentelprojects.ecommerce.repository.OrderRepository;
+import com.pimentelprojects.ecommerce.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderServiceImp implements OrderService{
+public class OrderServiceImp implements OrderService {
 
-    @Autowired
+
     private OrderRepository orderRepository;
+    @Autowired
+    public OrderServiceImp(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     public List<Order> findAll() {
@@ -56,8 +61,8 @@ public class OrderServiceImp implements OrderService{
     }
 
     @Override
-    public List<Order> findByUser(User user) {
-        return  orderRepository.findByUser(user);
+    public List<Order> findByUser(UserEntity userEntity) {
+        return  orderRepository.findByUserEntity(userEntity);
     }
 
     @Override

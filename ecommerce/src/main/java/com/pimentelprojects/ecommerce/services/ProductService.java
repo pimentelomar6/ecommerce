@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    public Product saveProduct(Product product);
-    public Optional<Product> getProduct(Long id);
-    public void update(Product product);
-    public void detele(Long id);
-    public List<Product> findAll();
+     Product saveProduct(Product product);
+     Optional<Product> getProduct(Long id);
+    void update(Product product);
+     void detele(Long id);
+     List<Product> findAll();
+     List<Product> searchProduct(String query);
 }

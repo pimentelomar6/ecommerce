@@ -10,10 +10,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class OrderDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "detail_id_seq",
+            sequenceName = "detail_id_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "detail_id_seq"
+    )
     private Long id;
     private String name;
     private double quantity;
@@ -21,6 +28,7 @@ public class OrderDetails {
     private double total;
 
     @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @ManyToOne

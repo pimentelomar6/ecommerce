@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org">
 
 <head>
 
@@ -26,7 +27,7 @@
       <h2>Usuarios</h2>
       <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a th:href="@{/admin}">Inicio</a></li>
+          <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
           <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
         </ol>
       </nav>
@@ -39,10 +40,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="users:${userList}">
-            <th th:text="${users.name}" scope="row"></th>
-            <td th:text="${users.mail}"></td>
-            <td th:text="${users.address}"></td>
+          <tr th:each="userEntities:${userList}">
+            <th th:text="${userEntities.name}" scope="row"></th>
+            <td th:text="${userEntities.email}"></td>
+            <td th:text="${userEntities.address}"></td>
           </tr>
         </tbody>
       </table>

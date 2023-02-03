@@ -2,8 +2,7 @@ package com.pimentelprojects.ecommerce.controllers;
 
 
 import com.pimentelprojects.ecommerce.models.Order;
-import com.pimentelprojects.ecommerce.models.Product;
-import com.pimentelprojects.ecommerce.models.User;
+import com.pimentelprojects.ecommerce.models.UserEntity;
 import com.pimentelprojects.ecommerce.services.OrderService;
 import com.pimentelprojects.ecommerce.services.ProductService;
 import com.pimentelprojects.ecommerce.services.UserService;
@@ -13,42 +12,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
     private ProductService productService;
-
-    @Autowired
     private UserService userService;
-
-    @Autowired
     private OrderService orderService;
 
-
-    @GetMapping
-    public String home(Model model){
-        List<Product> productList = productService.findAll();
-        model.addAttribute("products", productList);
-        if(productList.isEmpty()){
-            return "admin/home_empty";
-        }
-        return "admin/home";
+    @Autowired
+    public AdminController(ProductService productService,
+                           UserService userService,
+                           OrderService orderService) {
+        this.productService = productService;
+        this.userService = userService;
+        this.orderService = orderService;
     }
+
+    
 
     @GetMapping("/users")
     public String users(Model model){
-        List<User> users = userService.findAll().stream()
-                .filter(x-> x.getTipo().equals("USER"))
-                .collect(Collectors.toList());
+        List<UserEntity> userEntities = userService.findAll();
 
-        model.addAttribute("userList", users);
-        if(users.isEmpty()){
+        model.addAttribute("userList", userEntities);
+        if(userEntities.isEmpty()){
             return "admin/users_empty";
         }
         return "admin/users";
@@ -71,18 +62,5 @@ public class AdminController {
         return "admin/order_detail";
     }
 
-    @PostMapping("search")
-    public String search(@RequestParam String name, Model model, HttpSession httpSession){
-
-        List<Product> productList = productService.findAll()
-                .stream().filter(p -> p.getName().toLowerCase()
-                        .contains(name.toLowerCase()))
-                .collect(Collectors.toList());
-        model.addAttribute("products", productList);
-
-        //Sesion
-        model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        return "admin/home";
-    }
 
 }

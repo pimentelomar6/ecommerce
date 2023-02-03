@@ -1,7 +1,8 @@
-package com.pimentelprojects.ecommerce.services;
+package com.pimentelprojects.ecommerce.services.imp;
 
 import com.pimentelprojects.ecommerce.models.Product;
 import com.pimentelprojects.ecommerce.repository.ProductRepository;
+import com.pimentelprojects.ecommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,12 @@ import java.util.Optional;
 @Service
 public class ProductServiceImp implements ProductService {
 
-    @Autowired
+
     private ProductRepository productRepository;
+    @Autowired
+    public ProductServiceImp(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public Product saveProduct(Product product) {
@@ -40,5 +45,10 @@ public class ProductServiceImp implements ProductService {
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> searchProduct(String query) {
+        return productRepository.searchProduct(query);
     }
 }

@@ -1,4 +1,4 @@
-package com.pimentelprojects.ecommerce.services;
+package com.pimentelprojects.ecommerce.services.imp;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

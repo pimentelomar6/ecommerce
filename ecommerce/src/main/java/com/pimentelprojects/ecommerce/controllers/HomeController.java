@@ -4,47 +4,52 @@ package com.pimentelprojects.ecommerce.controllers;
 import com.pimentelprojects.ecommerce.models.Order;
 import com.pimentelprojects.ecommerce.models.OrderDetails;
 import com.pimentelprojects.ecommerce.models.Product;
-import com.pimentelprojects.ecommerce.models.User;
+import com.pimentelprojects.ecommerce.models.UserEntity;
+import com.pimentelprojects.ecommerce.security.SecurityUtil;
 import com.pimentelprojects.ecommerce.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
 
-    @Autowired
     private ProductService productService;
-    @Autowired
     private UserService userService;
-
-    @Autowired
     private OrderService orderService;
+    private OrderDetailService  orderDetailService;
 
     @Autowired
-    private OrderDetailService  orderDetailService;
+    public HomeController(ProductService productService,
+                          UserService userService,
+                          OrderService orderService,
+                          OrderDetailService orderDetailService) {
+        this.productService = productService;
+        this.userService = userService;
+        this.orderService = orderService;
+        this.orderDetailService = orderDetailService;
+    }
+
     List<OrderDetails> orderDetails = new ArrayList<OrderDetails>();
 
     Order order = new Order();
 
     @GetMapping("")
-    public String home(Model model, HttpSession httpSession){
+    public String home(Model model){
 
         model.addAttribute("products", productService.findAll());
 
-        //Sesion
-        model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        model.addAttribute("username", httpSession.getAttribute("username"));
+        //Session
+        model.addAttribute("role", SecurityUtil.role());
+        model.addAttribute("username", SecurityUtil.getSessionEmail());
 
         if(productService.findAll().isEmpty()){
             return "user/home_empty";
@@ -54,15 +59,14 @@ public class HomeController {
     }
 
     @GetMapping("product/{id}")
-    public String productByID(@PathVariable Long id, Model model, HttpSession httpSession){
+    public String productByID(@PathVariable Long id,
+                              Model model){
 
-        Product product = new Product();
-        Optional<Product> productOptional = productService.getProduct(id);
-        product = productOptional.get();
+        Product product  = productService.getProduct(id).get();
 
-        //Sesion
-        model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        model.addAttribute("username", httpSession.getAttribute("username"));
+        //Session
+        model.addAttribute("role", SecurityUtil.role());
+        model.addAttribute("username", SecurityUtil.getSessionEmail());
 
         model.addAttribute("product", product);
         return "user/product";
@@ -71,15 +75,13 @@ public class HomeController {
     @PostMapping("cart/add")
     public String addCart(@RequestParam Long id,
                          @RequestParam Integer cantidad,
-                         Model model,
-                         HttpSession httpSession){
+                         Model model){
         OrderDetails orderDetails1 = new OrderDetails();
-        Product product = new Product();
+
         double total = 0;
 
-        Optional<Product> optionalProduct = productService.getProduct(id);
+        Product product = productService.getProduct(id).get();
 
-        product = optionalProduct.get();
 
         orderDetails1.setQuantity(cantidad);
         orderDetails1.setPrice(product.getPrice());
@@ -100,9 +102,9 @@ public class HomeController {
 
         order.setTotal(total);
 
-        //Sesion
-        model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        model.addAttribute("username", httpSession.getAttribute("username"));
+        //Session
+        model.addAttribute("role", SecurityUtil.role());
+        model.addAttribute("username", SecurityUtil.getSessionEmail());
 
         model.addAttribute("car", orderDetails);
         model.addAttribute("order", order);
@@ -113,7 +115,8 @@ public class HomeController {
     // Quitar producto del Carrito
 
     @GetMapping("cart/delete/{id}")
-    public String deleteProductCart(@PathVariable Long id, Model model){
+    public String deleteProductCart(@PathVariable Long id,
+                                    Model model){
         //Nueva lista de Productos
         List<OrderDetails> newOrders = new ArrayList<OrderDetails>();
 
@@ -134,10 +137,10 @@ public class HomeController {
     }
 
     @GetMapping("cart")
-    public String getCart(Model model, HttpSession httpSession){
-        //Sesion
-        model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        model.addAttribute("username", httpSession.getAttribute("username"));
+    public String getCart(Model model){
+        //Session
+        model.addAttribute("role", SecurityUtil.role());
+        model.addAttribute("username", SecurityUtil.getSessionEmail());
 
         if(orderDetails.isEmpty()){
             return "user/cart_empty";
@@ -150,28 +153,27 @@ public class HomeController {
     }
 
     @GetMapping("order")
-    public String order(Model model, HttpSession httpSession){
-        User user = userService.findById( Long.parseLong(httpSession.getAttribute("idusuario").toString())).get();
+    public String order(Model model){
+        UserEntity userEntity = userService.findByEmail(SecurityUtil.getSessionEmail());
 
         model.addAttribute("car", orderDetails);
         model.addAttribute("order",order);
-        model.addAttribute("user",user);
+        model.addAttribute("user", userEntity);
 
-        //Sesion
-        model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        model.addAttribute("username", httpSession.getAttribute("username"));
+        //Session
+        model.addAttribute("role", SecurityUtil.role());
+        model.addAttribute("username", SecurityUtil.getSessionEmail());
         return "user/order_resume";
     }
 
     @GetMapping("order/save")
-    public String saveOrder(HttpSession httpSession){
-        Date dateCreated = new Date();
-        order.setDateCreate(dateCreated);
+    public String saveOrder(){
+
         order.setNumber(orderService.generateNumber());
 
         // Usuario
-        User user = userService.findById( Long.parseLong(httpSession.getAttribute("idusuario").toString()) ).get();
-        order.setUser(user);
+        UserEntity userEntity = userService.findByEmail(SecurityUtil.getSessionEmail());
+        order.setUserEntity(userEntity);
 
         orderService.save(order);
 
@@ -189,24 +191,20 @@ public class HomeController {
     }
 
     @PostMapping("search")
-    public String search(@RequestParam String name, Model model, HttpSession httpSession){
+    public String search(@RequestParam String name,
+                         Model model){
 
-        List<Product> productList = productService.findAll()
-                                    .stream().filter(p -> p.getName().toLowerCase()
-                                    .contains(name.toLowerCase()))
-                                    .collect(Collectors.toList());
-
+        List<Product> productList = productService.searchProduct(name);
 
         model.addAttribute("products", productList);
 
-        //Sesion
-        model.addAttribute("sesion", httpSession.getAttribute("idusuario"));
-        model.addAttribute("username", httpSession.getAttribute("username"));
+        //Session
+        model.addAttribute("role", SecurityUtil.role());
+        model.addAttribute("username", SecurityUtil.getSessionEmail());
 
         if(productList.isEmpty()){
             return "user/home_empty";
         }
-
 
         return "user/home";
     }

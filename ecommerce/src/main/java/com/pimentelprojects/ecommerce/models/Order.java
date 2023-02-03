@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,18 +18,27 @@ import java.util.List;
 @Setter
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "order_id_seq",
+            sequenceName = "order_id_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "order_id_seq"
+    )
     private Long id;
     private String number;
-    private Date dateCreate;
-    private Date dateReceived;
+    @CreationTimestamp
+    private LocalDateTime dateCreate;
+    private LocalDateTime dateReceived;
 
     private double total;
 
     @ManyToOne
-    private User user;
+    private UserEntity userEntity;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
     private List<OrderDetails> orderDetails;
 
 

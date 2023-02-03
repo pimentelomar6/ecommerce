@@ -2,9 +2,10 @@ package com.pimentelprojects.ecommerce.controllers;
 
 
 import com.pimentelprojects.ecommerce.models.Product;
-import com.pimentelprojects.ecommerce.models.User;
+import com.pimentelprojects.ecommerce.models.UserEntity;
+import com.pimentelprojects.ecommerce.security.SecurityUtil;
 import com.pimentelprojects.ecommerce.services.ProductService;
-import com.pimentelprojects.ecommerce.services.UploadFileService;
+import com.pimentelprojects.ecommerce.services.imp.UploadFileService;
 import com.pimentelprojects.ecommerce.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,22 +13,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
+
     private UserService userService;
-    @Autowired
     private ProductService productService;
 
-    @Autowired
     private UploadFileService fileService;
 
+    @Autowired
+    public ProductController(UserService userService,
+                             ProductService productService,
+                             UploadFileService fileService) {
+        this.userService = userService;
+        this.productService = productService;
+        this.fileService = fileService;
+    }
 
     @GetMapping("")
     public String show(Model model){
@@ -45,12 +52,11 @@ public class ProductController {
 
     @PostMapping("/create")
     public String save(Product product,
-                       @RequestParam("img") MultipartFile file,
-                       HttpSession httpSession) throws IOException {
+                       @RequestParam("img") MultipartFile file) throws IOException {
 
-        User user = userService.findById(Long.parseLong(httpSession.getAttribute("idusuario").toString())).get();
+        UserEntity userEntity = userService.findByEmail(SecurityUtil.getSessionEmail());
 
-        product.setUser(user);
+        product.setUserEntity(userEntity);
 
         // Imagen
         if(product.getId()==null){
@@ -64,9 +70,8 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model){
-        Product product = new Product();
-        Optional<Product> optionalProduct = productService.getProduct(id);
-        product = optionalProduct.get();
+
+        Product product = productService.getProduct(id).get();
 
         model.addAttribute("product", product);
 
@@ -76,8 +81,7 @@ public class ProductController {
     @PostMapping("/update")
     public String update(Product product,  @RequestParam("img") MultipartFile file) throws IOException {
 
-        Product product1 = new Product();
-        product1 = productService.getProduct(product.getId()).get();
+        Product product1 = productService.getProduct(product.getId()).get();
 
         if(file.isEmpty()){
 
@@ -92,7 +96,7 @@ public class ProductController {
             product.setImage(nameImage);
         }
 
-        product.setUser(product1.getUser());
+        product.setUserEntity(product1.getUserEntity());
         productService.update(product);
         return "redirect:/products";
     }
@@ -100,8 +104,7 @@ public class ProductController {
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") Long id){
 
-        Product product = new Product();
-        product = productService.getProduct(id).get();
+        Product product = productService.getProduct(id).get();
 
         // Eliminar cuando la imagen no sea la por defecto
         if(!product.getImage().equals("default.jpg")){
